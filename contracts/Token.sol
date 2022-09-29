@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract SwapCoin is ERC20("StakeCoin", "STC"){
+contract StakeCoin is ERC20("StakeCoin", "STC"){
     address owner;
     constructor () {
         msg.sender == owner;
