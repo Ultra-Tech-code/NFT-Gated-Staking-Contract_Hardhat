@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9
+pragma solidity ^0.8.0;
 
 interface IERC20{
     function transferFrom(address _from,address _to,uint256 _amount) external returns(bool);
@@ -58,20 +58,22 @@ contract stakeContract {
         uint256 _totalAmt = _amt;
 
         Record storage _record = records[msg.sender];
-
         // check that record exist for account, and update accordingly
         if (_record.isActive) {_totalAmt += _calculateYield(_record);}
         else {
             _record.stakedBy = msg.sender;
             _record.isActive = true;
-            _record.amount = _totalAmt;
-            _record.stakedAt = block.timestamp;
         }
 
-
+        _record.amount = _totalAmt;
+        _record.stakedAt = block.timestamp;
         totalStakes += _record.amount;
 
         return true;
+    }
+
+    function getUser(address userAddress) public view returns(Record memory u){
+        u = records[userAddress];
     }
 
     //withdraw token
@@ -81,7 +83,6 @@ contract stakeContract {
         uint256 _yield = _calculateYield(_record);
 
         uint256 _totalReturns = _yield + _record.amount;
-
 
         stakeToken.transfer(msg.sender, _totalReturns);
 

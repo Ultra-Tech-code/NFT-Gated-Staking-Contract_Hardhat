@@ -13,7 +13,7 @@ const ACCOUNT_PRIVATE_KEY2 = process.env.ACCOUNT_PRIVATE_KEY2;
 const INFURA_MAINNET_API_URL = process.env.INFURA_MAINNET_API_KEY_URL;
 
 module.exports = {
-  solidity: "^0.8.0",
+  solidity: "0.8.0",
   networks: {
     hardhat: {
       forking:{
